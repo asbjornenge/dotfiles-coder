@@ -1,11 +1,20 @@
 #!/bin/bash
-if ! command -v fish &> /dev/null
-then
-  sudo apt-get update -y
-  sudo apt-get install -y fish iputils-ping dnsutils
+
+# Gather missing packages
+packages=()
+if ! command -v fish &>/dev/null; then
+  packages+=("fish")
+fi
+if ! command -v ping &>/dev/null; then
+  packages+=("iputils-ping")
+fi
+if ! command -v dig &>/dev/null; then
+  packages+=("dnsutils")
 fi
 
-# Only change shell if it's not already fish
-if [[ "$SHELL" != *fish* ]]; then
-  sudo chsh -s "$(command -v fish)" coder
+# Install them all at once if needed
+if [ ${#packages[@]} -gt 0 ]; then
+  sudo apt-get update -y
+  sudo apt-get install -y "${packages[@]}"
 fi
+
