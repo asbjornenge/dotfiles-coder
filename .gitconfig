@@ -1,0 +1,19 @@
+[user]
+  name = Asbjørn Enge
+  email = asbjorn@hanafjedle.net
+[core]
+  autocrlf = false
+  mergeoptions = --no-ff --no-commit
+[alias]
+  st = status
+  aa = add --all
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+[pull]
+	rebase = false
+[safe]
+	directory = /media/asbjorn/writable/secrets
