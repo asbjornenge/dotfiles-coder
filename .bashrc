@@ -121,3 +121,4 @@ if [ -n "$PS1" ] && command -v fish >/dev/null 2>&1; then
   exec fish
 fi
 
+cp .personalize personalize
