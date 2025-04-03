@@ -118,7 +118,7 @@ if ! shopt -oq posix; then
 fi
 
 ln -sf .personalize personalize
-ln -sf .config.fish .config/fish/config.fish 
+ln -sf ~/.config.fish .config/fish/config.fish 
 
 if [ -n "$PS1" ] && command -v fish >/dev/null 2>&1; then
   exec fish
