@@ -3,3 +3,4 @@ if status is-interactive
 end
 alias c='clear'
 alias vi='nvim'
+eval (fnm env)
