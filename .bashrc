@@ -118,6 +118,7 @@ if ! shopt -oq posix; then
 fi
 
 ln -sf .personalize personalize
+ln -sf ~/.init.vim .config/nvim/init.vim
 ln -sf ~/.config.fish .config/fish/config.fish 
 ln -sf ~/.gitploy.fish .config/fish/functions/gitploy.fish 
 
