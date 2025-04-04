@@ -31,21 +31,7 @@ fi
 # 5. Install fnm + latest Node
 if ! command -v fnm &>/dev/null; then
   # Download and run fnm install script
-  curl -fsSL https://fnm.vercel.app/install | bash
-
-  # Add fnm to PATH in your bashrc/zshrc/fish config as needed.
-  # For bash, do:
-  echo 'export PATH="$HOME/.fnm:$PATH"' >> "$HOME/.bashrc"
-  echo 'eval "$(fnm env)"' >> "$HOME/.bashrc"
-
-  # Make fnm available in current session
-  export PATH="$HOME/.fnm:$PATH"
-  eval "$(fnm env)"
-
-  # Install latest Node and set it as default
-  fnm install --latest
-  fnm default latest
+  curl -fsSL https://fnm.vercel.app/install | sudo bash -s -- --install-dir /usr/local/bin --skip-shell
 fi
 
 echo "Setup complete!"
-
