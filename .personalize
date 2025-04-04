@@ -1,20 +1,28 @@
 #!/bin/bash
 
-# Gather missing packages
-packages=()
-if ! command -v fish &>/dev/null; then
-  packages+=("fish")
-fi
-if ! command -v ping &>/dev/null; then
-  packages+=("iputils-ping")
-fi
-if ! command -v dig &>/dev/null; then
-  packages+=("dnsutils")
+declare -A commands
+commands=(
+  [fish]="fish"
+  [ping]="iputils-ping"
+  [dig]="dnsutils"
+  [nvim]="neovim"
+)
+
+missing=()
+
+for cmd in "${!commands[@]}"; do
+  if ! command -v "$cmd" &>/dev/null; then
+    missing+=("${commands[$cmd]}")
+  fi
+done
+
+if [ ${#missing[@]} -gt 0 ]; then
+  sudo apt-get update -y
+  sudo apt-get install -y "${missing[@]}"
 fi
 
-# Install them all at once if needed
-if [ ${#packages[@]} -gt 0 ]; then
-  sudo apt-get update -y
-  sudo apt-get install -y "${packages[@]}"
+# Clone NvChad if not present
+if [ ! -d "$HOME/.config/nvim" ]; then
+  git clone https://github.com/NvChad/NvChad.git "$HOME/.config/nvim" --depth 1
 fi
 
