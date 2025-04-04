@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Collect missing packages
+# 1. Install essential packages if missing
 missing=()
 for pkg in fish iputils-ping dnsutils; do
   if ! command -v "${pkg%% *}" &>/dev/null; then
@@ -8,7 +8,7 @@ for pkg in fish iputils-ping dnsutils; do
   fi
 done
 
-# If Neovim isn't installed, get it from the unstable PPA
+# 2. Ensure we have Neovim (>= 0.10) from the unstable PPA
 if ! command -v nvim &>/dev/null; then
   sudo apt update
   sudo apt install -y software-properties-common
@@ -17,14 +17,35 @@ if ! command -v nvim &>/dev/null; then
   sudo apt install -y neovim
 fi
 
-# Install any other missing packages
+# 3. Install missing packages
 if [ ${#missing[@]} -gt 0 ]; then
   sudo apt update
   sudo apt install -y "${missing[@]}"
 fi
 
-# Clone NvChad starter if ~/.config/nvim doesn’t exist
+# 4. Clone NvChad starter if ~/.config/nvim is missing
 if [ ! -d "$HOME/.config/nvim" ]; then
   git clone --depth 1 https://github.com/NvChad/starter "$HOME/.config/nvim"
 fi
+
+# 5. Install fnm + latest Node
+if ! command -v fnm &>/dev/null; then
+  # Download and run fnm install script
+  curl -fsSL https://fnm.vercel.app/install | bash
+
+  # Add fnm to PATH in your bashrc/zshrc/fish config as needed.
+  # For bash, do:
+  echo 'export PATH="$HOME/.fnm:$PATH"' >> "$HOME/.bashrc"
+  echo 'eval "$(fnm env)"' >> "$HOME/.bashrc"
+
+  # Make fnm available in current session
+  export PATH="$HOME/.fnm:$PATH"
+  eval "$(fnm env)"
+
+  # Install latest Node and set it as default
+  fnm install --latest
+  fnm default latest
+fi
+
+echo "Setup complete!"
 
