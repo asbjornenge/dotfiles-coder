@@ -32,12 +32,7 @@ if [ ${#missing[@]} -gt 0 ]; then
   sudo apt install -y "${missing[@]}"
 fi
 
-# 4. Clone NvChad starter if ~/.config/nvim is missing
-if [ ! -d "$HOME/.config/nvim" ]; then
-  git clone --depth 1 https://github.com/NvChad/starter "$HOME/.config/nvim"
-fi
-
-# 5. Install fnm + latest Node
+# 4. Install fnm + latest Node
 if ! command -v fnm &>/dev/null; then
   # Download and run fnm install script
   curl -fsSL https://fnm.vercel.app/install | sudo bash -s -- --install-dir /usr/local/bin --skip-shell
