@@ -117,8 +117,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+mkdir -p ~/.config/nvim
+mkdir -p ~/.config/fish/functions
+
 ln -sf .personalize personalize
-ln -sf ~/.init.vim .config/nvim/init.vim
+ln -sf ~/.init.lua .config/nvim/init.lua
 ln -sf ~/.config.fish .config/fish/config.fish 
 ln -sf ~/.gitploy.fish .config/fish/functions/gitploy.fish 
 
