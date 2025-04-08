@@ -32,7 +32,12 @@ if [ ${#missing[@]} -gt 0 ]; then
   sudo apt install -y "${missing[@]}"
 fi
 
-# 4. Install fnm + latest Node
+# 4. Clone packer.nvim if packer is missing
+if [ ! -d "$HOME/.local/share/nvim/site/pack/packer" ]; then
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+
+# 5. Install fnm + latest Node
 if ! command -v fnm &>/dev/null; then
   # Download and run fnm install script
   curl -fsSL https://fnm.vercel.app/install | sudo bash -s -- --install-dir /usr/local/bin --skip-shell
