@@ -45,8 +45,8 @@ fi
 
 # 6. Install Node.js only if it's not already installed
 if ! command -v node &>/dev/null; then
-  fnm install --lts
-  fnm use --lts
+  fnm install -- --lts
+  fnm use -- --lts
 fi
 
 # 7. Install @anthropic-ai/claude-code if 'claude' is not a command
